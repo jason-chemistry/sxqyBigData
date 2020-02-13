@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.test.api.mapper.MZVisitMapper" >
+    <resultMap type="MZVisit" id="getMZVisit">
+        <!-- 定义主键 ,非常重要。如果是多个字段,则定义多个id -->
+        <!-- property：主键在pojo中的属性名 -->
+        <!-- column：主键在数据库中的列名 -->
+        <id property="id" column="id" />
+        <result property="count" column="count" />
+        <result property="MZname" column="name" />
+    </resultMap>
+    <select id="getMZname" parameterType="java.lang.String" resultMap="getMZVisit">
+        SELECT b.name, count(*)count from  mz_visit_diagnose a
+        left JOIN zd_unit_code b on a.visit_dept_code =b.code
+         WHERE visit_date between
+           (#{today}) and (#{nextDay})
+            GROUP BY b.name
+    </select>
+</mapper>
