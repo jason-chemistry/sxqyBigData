@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数据可视化demo</title>
+
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/static/css/common.css}">-->
+
+<!--    <link href="static/css/common.css" type='test/css' rel="stylesheet">-->
+<!--    <script src="static/js/jquery-3.3.1.min.js"></script>-->
+<!--    <script src="static/js/echarts.min.js"></script>-->
+
+<!--    <script src="static/js/common.js"></script>-->
+<!--    <script src="static/js/quota.js"></script>-->
+</head>
+
+<body>
+<!--顶部-->
+<header class="header left">
+    <div class="left nav">
+        <ul>
+            <li></li>
+        </ul>
+    </div>
+    <div class="header_center left" style="position:relative">
+
+        <h2><strong>医院大数据可视化（决策）平台</strong></h2>
+
+    </div>
+    <div class="right nav text_right">
+        <ul>
+
+        </ul>
+    </div>
+
+</header>
+<!--内容部分-->
+<div class="con left">
+    <!--数据总概-->
+    <div class="con_div">
+        <div class="con_div_text left">
+            <div class="con_div_text01 left">
+                <img src="../images/info_7.png" class="left text01_img" />
+                <div class="left text01_div">
+                    <p>门诊药占比:</p>
+                    <p>40.66%</p>
+                </div>
+            </div>
+            <div class="con_div_text01 right">
+                <img src="../images/info_8.png" class="left text01_img" />
+                <div class="left text01_div">
+                    <p>门诊均值费用:</p>
+                    <p>157.16</p>
+                </div>
+            </div>
+            <div class="con_div_text01 left">
+                <img src="../images/info_9.png" class="left text01_img" />
+                <div class="left text01_div">
+                    <p>住院药占比</p>
+                    <p>21.11%</p>
+                </div>
+            </div>
+            <div class="con_div_text01 right">
+                <img src="../images/info_10.png" class="left text01_img" />
+                <div class="left text01_div">
+                    <p>住院均值费用</p>
+                    <p>6902.76</p>
+                </div>
+            </div>
+            <div class="con_div_text01 left">
+                <img src="../images/info_11.png" class="left text01_img" />
+                <div class="left text01_div">
+                    <p>总药占比</p>
+                    <p>29.33%</p>
+                </div>
+            </div>
+            <div class="con_div_text01 right">
+                <img src="../images/info_12.png" class="left text01_img" />
+                <div class="left text01_div">
+                    <p>门诊预约率</p>
+                    <p>24.37%</p>
+                </div>
+            </div>
+        </div>
+        <div class="left div_any01">
+            <div class="div_any_child">
+                <div class="div_any_title">今日数据</div>
+                <div class="con_div_text01 left">
+
+                    <div class="left text03_div">
+                        <p>门诊人数</p>
+                        <p class="sky">352</p>
+                    </div>
+                </div>
+                <div class="con_div_text01 right">
+
+                    <div class="left text03_div">
+                        <p>在院人数</p>
+                        <p class="sky">115</p>
+                    </div>
+                </div>
+                <div class="con_div_text01 left">
+
+                    <div class="left text03_div">
+                        <p>入院人次</p>
+                        <p class="sky">11</p>
+                    </div>
+                </div>
+                <div class="con_div_text01 right">
+
+                    <div class="left text03_div">
+                        <p>检查人次</p>
+                        <p class="sky">213</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="left div_any01">
+            <div class="div_any_child" style="margin-left: 160px;">
+                <div class="div_any_title">今日门急诊人次</div>
+                <div id="lineChart1" style="width: 100%;height: 100%;display: inline-block;"></div>
+
+            </div>
+        </div>
+        //住院相关
+        <div class="left div_any01">
+
+            <div class="div_any_child01">
+                <div class="div_any_title">今日数据</div>
+                <div class="left">
+
+                    <p>住院预约:24.37%</p>
+                </div>
+                <div class="left">
+
+                    <p>住院预约:24.37%</p>
+                </div>
+
+                <div id="lineChart2" style="width: 100%;height: 100%;display: inline-block"></div>
+            </div>
+        </div>
+        <div class="left div_any01" style="margin-left: 120px;">
+
+            <div class="div_any_child01">
+                <div class="div_any_title">预约人数</div>
+                <div class="left">
+
+                    <p>住院预约:24.37%</p>
+                </div>
+                <div class="left">
+
+                    <p>住院预约:24.37%</p>
+                </div>
+
+                <div id="lineChart3" style="width: 100%;height: 100%;display: inline-block"></div>
+            </div>
+        </div>
+        <div class="left div_any01" style="margin-left: 100px;">
+
+            <div class="div_any_child01" >
+                <div class="div_any_title">昨日就诊人数</div>
+                <div class="left">
+
+                    <p>住院预约:24.37%</p>
+                </div>
+                <div class="left">
+
+                    <p>住院预约:24.37%</p>
+                </div>
+
+                <div id="lineChart4" style="width: 100%;height: 100%;display: inline-block"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+
+</html>

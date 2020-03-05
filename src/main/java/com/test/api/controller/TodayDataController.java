@@ -39,11 +39,34 @@ public class TodayDataController {
         return JSONObject.toJSONString(todayDataService.getInPeople());
 
     }
+    @ResponseBody
+    @RequestMapping(value = "/mzPeople",method = RequestMethod.GET)
+    @ApiOperation(value = "获取今日门诊总人数", notes = "无需参数")
+    public String getMzPeople (){
+        return JSONObject.toJSONString(todayDataService.getMzPeople());
 
+    }
 
+    @ResponseBody
+    @RequestMapping(value = "/zyCheckPeople",method = RequestMethod.GET)
+    @ApiOperation(value = "获取住院检查人数", notes = "无需参数")
+    public String getZyCheckPeople (){
+        return JSONObject.toJSONString(todayDataService.getZyCheckPeople());
 
+    }
+    @ResponseBody
+    @RequestMapping(value = "/mzCheckPeople",method = RequestMethod.GET)
+    @ApiOperation(value = "获取门诊检查人数", notes = "无需参数")
+    public String getMzCheckPeople (){
+        return JSONObject.toJSONString(todayDataService.getMzCheckPeople());
 
-
+    }
+    @ResponseBody
+    @RequestMapping(value = "/allCheckPeople",method = RequestMethod.GET)
+    @ApiOperation(value = "获取总检查人数", notes = "无需参数")
+    public String getAllCheckPeople (){
+        return JSONObject.toJSONString(todayDataService.getAllCheckPeople());
+    }
 
 
 
