@@ -23,5 +23,4 @@ public class TestController {
     public String turnToIndex (){
         return "index";
     }
-
 }
