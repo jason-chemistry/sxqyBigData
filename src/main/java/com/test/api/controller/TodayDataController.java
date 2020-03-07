@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Api(description = "获取今日数据接口")
 @RestController
-@RequestMapping(value="/TodayDay")
+@RequestMapping(value="/TodayData")
 public class TodayDataController {
 
     @Autowired

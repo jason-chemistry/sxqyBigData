@@ -3,7 +3,7 @@ package com.test.api.model;
 public class MZVisit {
 
     private int id;
-    private String  MZname;
+    private String  name;
     private String count;
 
     public int getId() {
@@ -14,12 +14,12 @@ public class MZVisit {
         this.id = id;
     }
 
-    public String getMZname() {
-        return MZname;
+    public String getName() {
+        return name;
     }
 
-    public void setMZname(String MZname) {
-        this.MZname = MZname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCount() {

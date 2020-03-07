@@ -15,4 +15,14 @@
            (#{today}) and (#{nextDay})
            GROUP BY app_way
     </select>
+
+    <select id="getTodayOldRequest" parameterType="java.lang.String" resultType="java.lang.Integer">
+           SELECT count(DISTINCT patient_id)count FROM dbo.mzy_request_yy where request_day between
+           (#{today}) and (#{nextDay})
+    </select>
+
+    <select id="getTodayNewRequest" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(DISTINCT p_name) FROM dbo.mzy_temp  where request_day between
+           (#{today}) and (#{nextDay})
+    </select>
 </mapper>

@@ -8,13 +8,35 @@
         <!-- column：主键在数据库中的列名 -->
         <id property="id" column="id" />
         <result property="count" column="count" />
-        <result property="MZname" column="name" />
+        <result property="name" column="name" />
     </resultMap>
+
+
+
     <select id="getMZname" parameterType="java.lang.String" resultMap="getMZVisit">
-        SELECT b.name, count(*)count from  mz_visit_diagnose a
-        left JOIN zd_unit_code b on a.visit_dept_code =b.code
-         WHERE visit_date between
-           (#{today}) and (#{nextDay})
-            GROUP BY b.name
+        SELECT   b.name,count(*)count FROM dbo.mzy_request_yy a left JOIN zd_unit_code b on a.unit_code=b.code
+        where a.request_day BETWEEN  (#{today}) and (#{nextDay})
+        GROUP BY b.name
     </select>
+
+    <select id="getDaiShoufei" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT count(*) FROM dbo.mz_charge_detail WHERE pay_mark = '5' AND charge_date between (#{today}) and (#{nextDay})
+    </select>
+    <select id="getYiQuYao" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT  count (*)count FROM dbo.mz_charge_detail WHERE confirm_flag = '1'AND group_no &lt;&gt; '00' AND charge_date between  '2020-03-06' and '2020-03-07'
+    </select>
+
+    <select id="getWeiQuYao" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT  count(*) FROM dbo.mz_charge_detail WHERE ISNULL(confirm_flag,'0') = '0'AND group_no &lt;&gt; '00'  AND charge_date between
+        (#{today}) and (#{nextDay})
+    </select>
+
+    <select id="getYyCount" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT   count(DISTINCT patient_id)count FROM dbo.mzy_request_yy a where a.request_day BETWEEN (#{today}) and (#{nextDay})
+    </select>
+
+    <select id="getMzVisitCount" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT count(*) from mz_visit where visit_date BETWEEN (#{today}) and (#{nextDay})
+    </select>
+
 </mapper>

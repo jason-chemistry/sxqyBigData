@@ -12,6 +12,14 @@ public interface MZVisitMapper {
     List<MZVisit> getMZname(@Param("today") String today, @Param("nextDay") String nextDay);
 
 
+    String getDaiShoufei(@Param("today")String today,@Param("nextDay")String nextDay);
 
+    String getYiQuYao(@Param("today")String today,@Param("nextDay")String nextDay);
+
+    String getWeiQuYao(@Param("today")String today,@Param("nextDay")String nextDay);
+
+    String getYyCount(@Param("today")String today,@Param("nextDay")String nextDay);
+
+    String getMzVisitCount(@Param("today")String today,@Param("nextDay")String nextDay);
 
 }

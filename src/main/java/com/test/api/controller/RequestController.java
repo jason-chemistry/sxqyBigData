@@ -19,20 +19,26 @@ import java.io.IOException;
 
 @Api(description = "获取预约类型接口")
 @RestController
-@RequestMapping(value="/requests")
+@RequestMapping(value="/Requests")
 public class RequestController {
 
     @Autowired
     RequestService requestService;
 
     @ResponseBody
-    @RequestMapping(value = "",method = RequestMethod.GET)
+    @RequestMapping(value = "/requestType",method = RequestMethod.GET)
     @ApiOperation(value = "获取预约类型", notes = "无需参数")
     public String getRequests (){
         return JSONObject.toJSONString(requestService.getRequest());
     }
 
 
+    @ResponseBody
+    @RequestMapping(value = "/allRequest",method = RequestMethod.GET)
+    @ApiOperation(value = "获取预约总人数", notes = "无需参数")
+    public String getALLRequests (){
+        return JSONObject.toJSONString(requestService.getTodayAllRequest());
+    }
 
 
 
