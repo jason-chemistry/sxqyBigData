@@ -16,278 +16,19 @@ $(function() {
 	//十分钟获取预约情况
 	getDepartment();
 	setInterval(getDepartment,600000);
+	//获取一周门诊
 	getWeekMzCount();
+
+	lisAndCheck();
+	setInterval(lisAndCheck,600000);
+
+
+	getDataMap();
+	setInterval(getDataMap,600000);
+	// setInterval(setClock,1000)
 });
 
-function init() {
-	var myColor = ['#1089E7', '#F57474', '#56D0E3', '#F8B448', '#8B78F6'];
-	//急诊
-	var lineChart1 = echarts.init(document.getElementById('lineChart1'));
-	lineChart1.setOption({
-		//		title: {
-		//			text: '今日门急诊人次',
-		//		 textStyle: {
-		//            fontWeight: "normal",
-		//            color: "#fff", 
-		//            fontSize: 14
-		//    }
-		//		},
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {
-				type: 'cross',
-				label: {
-					backgroundColor: '#6a7985'
-				}
-			}
-		},
-		legend: {
-			padding: [30, 0, 0, 0], //可设定图例[距上方距离，距右方距离，距下方距离，距左方距离]
-			data: ['门诊', '急诊'],
-			textStyle: { //图例文字的样式
-				color: '#ccc',
-				fontSize: 14
-			}
-		},
-
-		grid: {
-			left: '3%',
-			right: '4%',
-			bottom: '5%',
-			containLabel: true
-		},
-		xAxis: [{
-			type: 'category',
-			boundaryGap: false,
-			data: ['8:00', '10:00', '12:00', '14:00', '16:00', '18:00'],
-			axisLine: {
-				lineStyle: {
-					color: '#FFF'
-
-				}
-			}
-		}],
-		yAxis: [{
-			type: 'value',
-			axisLine: {
-				lineStyle: {
-					color: '#FFF'
-
-				}
-			}
-
-		}],
-		series: [{
-
-				name: '门诊',
-				type: 'line',
-				stack: '总量',
-				areaStyle: {},
-				//				itemStyle: {
-				//					normal: {
-				//						color: '#000', //改变折线点的颜色
-				//						lineStyle: {
-				//							color: '#fff' //改变折线颜色
-				//						}
-				//					}
-				//				},
-				data: [120, 132, 101, 134, 90, 230]
-			},
-			{
-				name: '急诊',
-				type: 'line',
-				stack: '总量',
-				areaStyle: {},
-				data: [220, 182, 191, 234, 290, 330]
-			}
-		]
-	});
-
-	// var lineChart2 = echarts.init(document.getElementById('lineChart2'));
-	// lineChart2.setOption({
-	// 	radar: [{
-	// 		indicator: [{
-	// 				text: '111',
-	//
-	// 			},
-	// 			{
-	// 				text: '销售单位'
-	// 			},
-	// 			{
-	// 				text: '使用单位'
-	// 			},
-	// 			{
-	// 				text: '生产单位'
-	// 			},
-	// 			{
-	// 				text: '处置单位'
-	// 			},
-	// 			{
-	// 				text: '储存单位'
-	// 			}
-	// 		],
-	// 		center: ['50%', '47%'], // 位置
-	// 		radius: 130, //大小
-	// 		startAngle: 90,
-	// 		splitNumber: 4,
-	// 		shape: 'circle',
-	// 		name: {
-	// 			formatter: '{value}',
-	// 			textStyle: {
-	// 				color: 'aqua' // 文字颜色
-	// 			}
-	// 		},
-	// 		splitArea: {
-	// 			areaStyle: {
-	// 				color: [
-	// 					'rgba(114, 172, 209, 0.1)',
-	// 					'rgba(114, 172, 209, 0.1)',
-	// 					'rgba(114, 172, 209, 0.1)',
-	// 					'rgba(114, 172, 209, 0.1)',
-	// 					'rgba(114, 172, 209, 0.1)'
-	// 				], //圆环颜色
-	// 				shadowColor: 'aqua', // 圆颜色
-	// 				shadowBlur: 10
-	// 			}
-	// 		},
-	// 		axisLine: {
-	// 			lineStyle: {
-	// 				color: 'aqua' // 分割线
-	// 			}
-	// 		},
-	// 		splitLine: {
-	// 			lineStyle: {
-	// 				color: 'aqua' //圆线
-	// 			}
-	// 		}
-	// 	}],
-	// 	series: [{
-	// 		name: '雷达图',
-	// 		type: 'radar',
-	// 		itemStyle: {
-	// 			emphasis: {
-	// 				// color: 各异,
-	// 				lineStyle: {
-	// 					width: 4
-	// 				}
-	// 			}
-	// 		},
-	// 		data: [{
-	// 			value: [5678, 3678, -6781, 1678, 1780, 3671],
-	// 			areaStyle: {
-	// 				normal: {
-	// 					color: 'rgba(0, 255, 255, 0.8)' // 选择区域颜色
-	// 				}
-	// 			}
-	// 		}]
-	// 	}]
-	// });
-	//
-	// var lineChart3 = echarts.init(document.getElementById('lineChart3'));
-	// lineChart3.setOption({
-	// 	tooltip: {
-	// 		trigger: 'item',
-	// 		formatter: '{a} <br/>{b}: {c} ({d}%)'
-	// 	},
-	// 	title: {
-	// 		text: '总预约人数:' + '2000',
-	// 		x: 'center',
-	// 		y: 'center',
-	// 		textStyle: {
-	// 			fontSize: 20,
-	// 			color: '#39CCCC'
-	// 		}
-	// 	},
-	// 	legend: {
-	// 		orient: 'horizontal',
-	// 		left: 10,
-	// 		data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
-	// 	},
-	// 	series: [{
-	// 		name: '访问来源',
-	// 		type: 'pie',
-	// 		radius: ['50%', '70%'],
-	// 		avoidLabelOverlap: false,
-	// 		label: {
-	// 			normal: {
-	// 				show: false,
-	// 				position: 'center'
-	// 			},
-	//
-	// 		},
-	// 		labelLine: {
-	// 			normal: {
-	// 				show: false
-	// 			}
-	// 		},
-	// 		data: [{
-	// 				value: 335,
-	// 				name: '直接访问'
-	// 			},
-	// 			{
-	// 				value: 310,
-	// 				name: '邮件营销'
-	// 			},
-	// 			{
-	// 				value: 234,
-	// 				name: '联盟广告'
-	// 			},
-	// 			{
-	// 				value: 135,
-	// 				name: '视频广告'
-	// 			},
-	// 			{
-	// 				value: 1548,
-	// 				name: '搜索引擎'
-	// 			}
-	// 		],
-	// 		itemStyle: {
-	// 			emphasis: {
-	// 				shadowBlur: 10,
-	// 				shadowOffsetX: 0,
-	// 				shadowColor: 'rgba(0, 0, 0, 0.5)'
-	// 			},
-	// 			normal: {
-	// 				color: function(params) {
-	// 					//自定义颜色
-	// 					var colorList = [
-	// 						'#2f83e4', '#00e5c1', '#23cbff', '#36478c', '#29527e', '#029bbb',
-	// 					];
-	// 					return colorList[params.dataIndex]
-	// 				}
-	// 			}
-	// 		}
-	// 	}]
-	// });
-	//
-	// var lineChart4 = echarts.init(document.getElementById('lineChart4'));
-	// lineChart4.setOption({
-	// 	xAxis: {
-	// 		type: 'category',
-	// 		data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-	// 		axisLine: {
-	// 			lineStyle: {
-	// 				color: '#FFF'
-	//
-	// 			}
-	// 		}
-	// 	},
-	// 	yAxis: {
-	// 		type: 'value',
-	// 		axisLine: {
-	// 			lineStyle: {
-	// 				color: '#FFF'
-	//
-	// 			}
-	// 		}
-	// 	},
-	// 	series: [{
-	// 		data: [120, 200, 150, 80, 70, 110, 130],
-	// 		type: 'bar'
-	// 	}]
-	// });
-
-}
+//今日数据
 function getTodayData() {
 
 	$.ajax({
@@ -297,8 +38,6 @@ function getTodayData() {
 		timeout:2000,//超时
 		//请求成功
 		success:function(data,status){
-			console.log(data);
-			console.log(data.checkPeople);
 			$(".checkPeople").html(data.checkPeople);
 			$(".zyPeople").html(data.zyPeople);
 			$(".inPeople").html(data.inPeople);
@@ -312,6 +51,8 @@ function getTodayData() {
 
 
 }
+
+//各类药物信息
 function getDrugMessage() {
 	$.ajax({
 		url:'http://localhost:9090/MZVisits/DrugMessage',//地址
@@ -320,8 +61,6 @@ function getDrugMessage() {
 		timeout:2000,//超时
 		//请求成功
 		success:function(data,status){
-			console.log(data);
-			console.log(data.yiQuYao)
 			$(".YiQuYao").html(data.yiQuYao);
 			$(".WeiQuYao").html(data.weiQuYao);
 			$(".DaiShoufei").html(data.daiShoufei);
@@ -333,6 +72,8 @@ function getDrugMessage() {
 		}
 	})
 }
+
+//各科室预约人数
 function  getDepartment() {
 	var names=[];
 	var nums=[];
@@ -345,7 +86,7 @@ function  getDepartment() {
 		success:function(data,status){
 			for(var i=0;i<data.length;i++){
 				names.push(data[i].name.replace(/\s+/g,""));    //挨个取出类别并填入类别数组
-				nums.push(data[i].count.replace(/\s+/g,""));
+				nums.push(data[i].count);
 			}
 			var lineChart4 = echarts.init(document.getElementById('lineChart4'));
 			lineChart4.setOption({
@@ -451,6 +192,7 @@ function  getDepartment() {
 	})
 }
 
+//一周门诊人数
 function getWeekMzCount() {
 	var day=[];
 	var count=[];
@@ -461,71 +203,76 @@ function getWeekMzCount() {
 		timeout:2000,//超时
 		//请求成功
 		success:function(data,status){
-			for(var i=0;i<data.length;i++){
+			for(var i=data.length-1;i>=0;i--){
 				day.push(data[i].day.replace(/\s+/g,""));    //挨个取出类别并填入类别数组
 				count.push(data[i].count.replace(/\s+/g,""));
 			}
-			var lineChart1 = echarts.init(document.getElementById('lineChart1'));
+
 			var colors = ['#5793f3', '#d14a61', '#675bba'];
+			var lineChart1 = echarts.init(document.getElementById('lineChart1'));
 			lineChart1.setOption({
 				color:  ['#5793f3', '#d14a61', '#675bba'],
-
 				grid: {
-						left:'70%'
+					x:'12%',
+					y:'20%',
+					height:'65%'
 				},
+
 				xAxis: [
 					{
 						type: 'category',
 						axisTick: {
-							alignWithLabel: true,
+							alignWithLabel: true
 
 						},
 						axisLine: {
 							onZero: false,
 							lineStyle: {
-								color: colors[1]
+								color: '#fff'
 							}
 						},
 						axisPointer: {
-							label: {
-								formatter: function (params) {
-									return '降水量  ' + params.value
-										+ (params.seriesData.length ? '：' + params.seriesData[0].data : '');
-								}
-							}
+
 						},
 						axisLabel: {
 							textStyle: {
 								//文字样式
 								color: "#fff",
-								fontSize: "12",
+								fontSize: "10"
 
 							},
-							show:true,					//---是否显示
-							inside:false,				//---是否朝内
-							rotate:0,					//---旋转角度
-							margin: 8,
+
+							show:true,     //---是否显示
+							inside:false,    //---是否朝内
+							rotate:0,     //---旋转角度
+							margin: 8
 						},
 						data: day
-					},
+					}
 
 				],
 				yAxis: [
 					{
 						type: 'value',
+						axisLine: {
+							onZero: false,
+							lineStyle: {
+								color: '#fff'
+							}
+						},
 						axisLabel: {
 							textStyle: {
 								//文字样式
 								color: "#fff",
-								fontSize: "12",
+								fontSize: "12"
 
 							},
-							show:true,					//---是否显示
-							inside:false,				//---是否朝内
-							rotate:0,					//---旋转角度
-							margin: 8,
-						},
-					},
+							show:true,     //---是否显示
+							inside:false,    //---是否朝内
+							rotate:0,     //---旋转角度
+							margin: 8
+						}
+					}
 				],
 				series: [
 
@@ -533,8 +280,18 @@ function getWeekMzCount() {
 						name: '一周就诊人数',
 						type: 'line',
 						smooth: true,
-						data: count
+						itemStyle : {
+							normal : {
+								color:'#FFFF00', //改变折线点的颜色
+								lineStyle:{
+									color:'#FFFF00' //改变折线颜色
+								},
+								label : {show: true}
+							}
+						},
+						data:  count
 					}
+
 				]
 			})
 		},
@@ -547,12 +304,216 @@ function getWeekMzCount() {
 
 }
 
-function getTime() {
+//今日各时间点（就诊、收费、取药、检验、检查）折线图
+function getDataMap() {
+	let sfCount=[];
+	let lisCount=[];
+	let qyCount=[];
+	let mzCount=[];
+
+
+	$.ajax({
+		url:'http://localhost:9090/dataMap',//地址
+		dataType:'json',//数据类型
+		type:'GET',//类型
+		timeout:2000,//超时
+		//请求成功
+		success:function(data,status){
+			console.log(data['SFCOUNT']);
+			console.log(data['QYCOUNT']);
+			var colors = ['#5793f3', '#d14a61', '#675bba'];
+			var lineChart2 = echarts.init(document.getElementById('lineChart2'));
+			lineChart2.setOption({
+				color:['#4472C5','#ED7C30','#80FF80','#FF8096','#800080'],
+				legend: {
+					top: "10%",
+					data: ['就诊', '收费', '取药', '检验'],
+					textStyle:{//图例文字的样式
+						color:'#fff',
+						fontSize:14
+					}
+				},
+				grid: {
+					left: '3%',
+					right: '4%',
+					top:'16%',
+					height: '70%',
+					containLabel: true
+				},
+
+				xAxis: {
+					type: 'category',
+					boundaryGap: false,
+					data: ['8:00', '9:00','10:00','11:00','12:00','13:00', '14:00', '15:00', '16:00','17:00'],
+					axisLine: {
+						onZero: false,
+						lineStyle: {
+							color: '#fff'
+						}
+					},
+					axisPointer: {
+
+					},
+					axisLabel: {
+						textStyle: {
+							//文字样式
+							color: "#fff",
+							fontSize: "10"
+
+						},
+
+						show:true,     //---是否显示
+						inside:false,    //---是否朝内
+						rotate:0,     //---旋转角度
+						margin: 8
+					},
+				},
+				yAxis: {
+					type: 'value',
+					axisLine: {
+						onZero: false,
+						lineStyle: {
+							color: '#fff'
+						}
+					},
+					axisPointer: {
+
+					},
+					axisLabel: {
+						textStyle: {
+							//文字样式
+							color: "#fff",
+							fontSize: "10"
+
+						},
+
+						show:true,     //---是否显示
+						inside:false,    //---是否朝内
+						rotate:0,     //---旋转角度
+						margin: 8
+					},
+				},
+				series: [
+					{
+						name: '就诊',
+						type: 'line',
+
+						data: data['MZCOUNT']
+					},
+					{
+						name: '收费',
+						type: 'line',
+
+						data: data['SFCOUNT']
+					},
+					{
+						name: '取药',
+						type: 'line',
+
+						data:data['QYCOUNT']
+					},
+					{
+						name: '检验',
+						type: 'line',
+						data:data['LISCOUNT']
+					},
+
+				]
+			})
+		},
+		//失败/超时
+		error:function(XMLHttpRequest,textStatus,errorThrown){
+
+		}
+	});
+
+
+
+
+
+
+}
+
+function lisAndCheck() {
+	var day=[];
+	var count=[];
+	$.ajax({
+		url:'http://localhost:9090/dataMap/CheckAndLis',//地址
+		dataType:'json',//数据类型
+		type:'GET',//类型
+		timeout:2000,//超时
+		//请求成功
+		success:function(data,status){
+			var lis=data[0];
+			var check=data[1];
+			var colors = ['#C1232B','#B5C334'];
+			var lineChart3 = echarts.init(document.getElementById('lineChart3'));
+			lineChart3.setOption({
+				color:colors,
+				legend: {
+					top: "10%",
+					orient: 'horizontal',
+					left: 'center',
+					data: ['检验人次', '检查人次'],
+					textStyle:{//图例文字的样式
+						color:'#fff',
+						fontSize:13
+					}
+				},
+				series: [
+					{
+						name: '访问来源',
+						type: 'pie',
+						radius: '55%',
+						center: ['50%', '55%'],
+						data: [
+							{value: lis, name: '检验人次'},
+							{value: check, name: '检查人次'},
+
+						],
+						emphasis: {
+							itemStyle: {
+								shadowBlur: 10,
+								shadowOffsetX: 0,
+								shadowColor: 'rgba(0, 0, 0, 0.5)'
+							}
+						}
+					}
+				]
+			})
+		},
+		//失败/超时
+		error:function(XMLHttpRequest,textStatus,errorThrown){
+
+		}
+	})
+
+}
+
+function setClock() {
 	let date = new Date();
+	let Hour=date.getHours().toString();
+	let Min=date.getMinutes().toString();
+	let Sec=date.getSeconds().toString();
 
-	let dateDay = date.getDay();
+	if(Hour=='14' && Min=='20' && Sec=='0'){
+		//获取数据，并设置定时器
 
-	let week;
+	}
+
+}
+
+
+//开始以后去查九次 每次到几点的时间，如果是0的话就去掉
+
+
+//获取时间
+function getTime() {
+	var  date = new Date();
+
+	var dateDay = date.getDay();
+
+	var week;
 	if(dateDay == 1){
 		week= '星期一'
 	} else if(dateDay == 2){
@@ -568,12 +529,12 @@ function getTime() {
 	} else {
 		week='星期日'
 	}
-	let time1=dateFormat("YYYY年mm月dd日 HH:MM:SS", date);
-	let times=time1+" "+week;
+	var time1=dateFormat("YYYY年mm月dd日 HH:MM:SS", date);
+	var times=time1+" "+week;
 	$(".time").html(times);
 }
 function dateFormat(fmt, date) {
-	let ret;
+	var ret;
 	const opt = {
 		"Y+": date.getFullYear().toString(),        // 年
 		"m+": (date.getMonth() + 1).toString(),     // 月
@@ -583,7 +544,7 @@ function dateFormat(fmt, date) {
 		"S+": date.getSeconds().toString()          // 秒
 		// 有其他格式化字符需求可以继续添加，必须转化成字符串
 	};
-	for (let k in opt) {
+	for (var k in opt) {
 		ret = new RegExp("(" + k + ")").exec(fmt);
 		if (ret) {
 			fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))

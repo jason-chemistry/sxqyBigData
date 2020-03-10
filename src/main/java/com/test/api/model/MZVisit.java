@@ -4,7 +4,7 @@ public class MZVisit {
 
     private int id;
     private String  name;
-    private String count;
+    private int count;
 
     public int getId() {
         return id;
@@ -22,11 +22,14 @@ public class MZVisit {
         this.name = name;
     }
 
-    public String getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(String count) {
+    public void setCount(int count) {
         this.count = count;
     }
+
+
+
 }

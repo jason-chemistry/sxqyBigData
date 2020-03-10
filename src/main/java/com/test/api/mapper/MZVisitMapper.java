@@ -18,7 +18,7 @@ public interface MZVisitMapper {
 
     String getWeiQuYao(@Param("today")String today,@Param("nextDay")String nextDay);
 
-    String getYyCount(@Param("today")String today,@Param("nextDay")String nextDay);
+    String getYShoueiCount(@Param("today")String today,@Param("nextDay")String nextDay);
 
     String getMzVisitCount(@Param("today")String today,@Param("nextDay")String nextDay);
 

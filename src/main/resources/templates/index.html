@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>绍兴第七人民医院大数据</title>
+    <title>绍兴第七人民医院</title>
 
-    <link  rel="stylesheet" type="text/css"  href="css/test1.css">
+    <link  rel="stylesheet" type="text/css"  href="css/test2.css">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/echarts.min.js"></script>
     <script src="js/common.js"></script>
@@ -22,7 +22,7 @@
     </div>
     <div class="header_center left" style="position:relative">
 
-        <h2><strong>第七人民医院大数据可视化平台</strong></h2>
+        <h2><strong>绍兴市第七人民医院</strong></h2>
 
     </div>
     <div class="right nav text_right">
@@ -40,45 +40,46 @@
             <div class="con_div_text01 left" style="margin-top: 15px">
                 <img src="images/info_7.png" class="left text01_img" />
                 <div class="left text01_div">
-                    <p>今日预约人数</p>
+                    <p>今日已收费人次</p>
                     <p class="YyCount"></p>
                 </div>
             </div>
             <div class="con_div_text01 right" style="margin-top: 15px">
-                <img src="images/info_8.png" class="left text01_img" />
+                <img src="images/info_11.png" class="left text01_img" />
                 <div class="left text01_div">
-                    <p >门诊待收费人数</p>
-                    <p class="DaiShoufei"></p>
+                    <p>今日已取药人次</p>
+                    <p class="YiQuYao"></p>
                 </div>
             </div>
             <div class="con_div_text01 left" style="margin-top: 40px">
-                <img src="images/info_11.png" class="left text01_img" />
+
+                <img src="images/info_8.png" class="left text01_img" />
                 <div class="left text01_div">
-                    <p>今日已取药人数</p>
-                    <p class="YiQuYao"></p>
+                    <p >今日待收费人数</p>
+                    <p class="DaiShoufei"></p>
                 </div>
             </div>
             <div class="con_div_text01 right" style="margin-top: 40px">
                 <img src="images/info_12.png" class="left text01_img" />
                 <div class="left text01_div">
-                    <p>今日未取药人数</p>
+                    <p>今日待取药人次</p>
                     <p class="WeiQuYao"></p>
                 </div>
             </div>
-<!--            <div class="con_div_text01 left">-->
-<!--                <img src="images/info_11.png" class="left text01_img" />-->
-<!--                <div class="left text01_div">-->
-<!--                    <p>总药占比</p>-->
-<!--                    <p>29.33%</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="con_div_text01 right">-->
-<!--                <img src="images/info_12.png" class="left text01_img" />-->
-<!--                <div class="left text01_div">-->
-<!--                    <p>门诊预约率</p>-->
-<!--                    <p>24.37%</p>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="con_div_text01 left">
+                <img src="images/info_11.png" class="left text01_img" />
+                <div class="left text01_div">
+                <p>今日收费总人次</p>
+                <p>29.33%</p>
+                </div>
+             </div>
+            <div class="con_div_text01 right">
+                <img src="images/info_12.png" class="left text01_img" />
+                <div class="left text01_div">
+                    <p>今日取药总人次</p>
+                    <p>24.37%</p>
+                </div>
+            </div>
         </div>
         <div class="left div_any01">
             <div class="div_any_child">
@@ -86,14 +87,14 @@
                 <div class="con_div_text01 left">
 
                     <div class="left text03_div">
-                        <p >门诊人数</p>
+                        <p>门诊人次</p>
                         <p class="sky mzPeople"></p>
                     </div>
                 </div>
                 <div class="con_div_text01 right">
 
                     <div class="left text03_div">
-                        <p >在院人数</p>
+                        <p >在院人次</p>
                         <p class="sky zyPeople"></p>
                     </div>
                 </div>
@@ -107,7 +108,7 @@
                 <div class="con_div_text01 right">
 
                     <div class="left text03_div">
-                        <p>检查人次</p>
+                        <p>出院人次</p>
                         <p class="sky checkPeople"></p>
                     </div>
                 </div>
@@ -117,7 +118,7 @@
         </div>
         <div class="left div_any01">
             <div class="div_any_child" style="margin-left: 160px;">
-                <div class="div_any_title">今日门急诊人次</div>
+                <div class="div_any_title">一周门诊人次</div>
                 <div id="lineChart1" style="width: 100%;height: 100%;display: inline-block;"></div>
 
             </div>
@@ -126,7 +127,7 @@
         <div class="left div_any01">
 
             <div class="div_any_child01">
-                <div class="div_any_title">今日数据</div>
+                <div class="div_any_title">门诊实时数据</div>
                 <div class="left">
 
 
@@ -142,7 +143,7 @@
         <div class="left div_any01" style="margin-left: 120px;">
 
             <div class="div_any_child01">
-                <div class="div_any_title">预约人数</div>
+                <div class="div_any_title">检验检查人次</div>
                 <div class="left">
 
 

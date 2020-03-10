@@ -5,6 +5,24 @@ public class DrugMessage {
     private String WeiQuYao;
     private String YiQuYao;
     private String YyCount;
+    private String Fcount;
+    private String Ycount;
+
+    public String getFcount() {
+        return Fcount;
+    }
+
+    public void setFcount(String fcount) {
+        Fcount = fcount;
+    }
+
+    public String getYcount() {
+        return Ycount;
+    }
+
+    public void setYcount(String ycount) {
+        Ycount = ycount;
+    }
 
     public String getDaiShoufei() {
         return DaiShoufei;

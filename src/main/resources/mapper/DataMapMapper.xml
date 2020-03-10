@@ -2,6 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.test.api.mapper.DataMapper" >
+        <select id="getLisCount" parameterType="java.lang.String" resultType="java.lang.String" >
+                SELECT count(*) from mz_lis_line_interface where print_time between (#{today})  and (#{nextDay})
+        </select>
 
-    
+        <select id="getMzCount" parameterType="java.lang.String" resultType="java.lang.Integer" >
+               SELECT count(*) from mz_visit where visit_date between (#{today}) and (#{nextDay})
+        </select>
+
+        <select id="getQYCount" parameterType="java.lang.String" resultType="java.lang.Integer" >
+               SELECT  count (*)count FROM dbo.mz_charge_detail WHERE confirm_flag = '1'AND group_no &lt;&gt; '00' AND charge_date between (#{today})
+               and  (#{nextDay})
+        </select>
+
+        <select id="getSfCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+                SELECT count(*) FROM dbo.mz_charge_detail WHERE pay_mark = '0' AND charge_date between (#{today}) and (#{nextDay})
+        </select>
 </mapper>

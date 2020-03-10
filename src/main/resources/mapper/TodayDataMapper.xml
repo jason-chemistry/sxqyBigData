@@ -11,12 +11,16 @@
          between  (#{today}) and (#{nextDay})
     </select>
     <select id="getMzPeople" parameterType="java.lang.String" resultType="java.lang.String">
-            SELECT count(DISTINCT social_no) FROM dbo.mz_patient_mi where lv_date>(#{today})
+           SELECT count(*) from mz_visit where visit_date BETWEEN (#{today}) and (#{nextDay})
     </select>
     <select id="getMzCheckPeople" parameterType="java.lang.String" resultType="java.lang.String">
             SELECT count(DISTINCT patientid) FROM dbo.tbl_checkapply_mz where askdate>(#{today})  and status in('a','e')
     </select>
     <select id="getZyCheckPeople" parameterType="java.lang.String" resultType="java.lang.String">
             SELECT count(DISTINCT patientid) FROM dbo.tbl_checkapply where askdate>(#{today})   and status in('a','e')
+    </select>
+    <select id="getOutPeople" parameterType="java.lang.String"  resultType="java.lang.String">
+        SELECT count(*)count FROM dbo.zy_inactpatient where admiss_date
+         between  (#{today}) and (#{nextDay})
     </select>
 </mapper>

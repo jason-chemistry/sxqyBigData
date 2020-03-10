@@ -13,9 +13,11 @@ public interface TodayDataMapper {
 
     String getInPeople(@Param("today")String today,@Param("nextDay")String nextDay);
 
-    String getMzPeople(@Param("today")String today);
+    String getMzPeople(@Param("today")String today,@Param("nextDay")String nextDay);
 
     String getMzCheckPeople(@Param("today")String today);
 
     String getZyCheckPeople(@Param("today")String today);
+
+    String getOutPeople(@Param("today")String today,@Param("nextDay")String nextDay);
 }

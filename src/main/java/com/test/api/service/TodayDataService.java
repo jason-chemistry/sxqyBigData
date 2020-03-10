@@ -27,11 +27,17 @@ public class TodayDataService {
         todayData.setInPeople(getInPeople());
         todayData.setZyPeople(getZyPeople());
         todayData.setMzPeople(getMzPeople());
-        todayData.setCheckPeople(getAllCheckPeople());
+        todayData.setCheckPeople(getOutPeople());
         return todayData;
     }
     public String getZyPeople(){
         return todayDataMapper.getZyPeople();
+    }
+    public String getOutPeople(){
+        HashMap timer = TimeMap.getTimer();
+        String today= (String) timer.get("today");
+        String nextDay= (String) timer.get("nextDay");
+        return todayDataMapper.getOutPeople(today,nextDay);
     }
     public String getInPeople(){
         HashMap timer = TimeMap.getTimer();
@@ -43,7 +49,7 @@ public class TodayDataService {
         HashMap timer = TimeMap.getTimer();
         String today= (String) timer.get("today");
         String nextDay= (String) timer.get("nextDay");
-        return todayDataMapper.getMzPeople(today);
+        return todayDataMapper.getMzPeople(today,nextDay);
     }
     public String getZyCheckPeople(){
         Date date =new Date();

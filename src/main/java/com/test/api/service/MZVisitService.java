@@ -27,15 +27,33 @@ public class MZVisitService {
         HashMap timer = TimeMap.getTimer();
         String today= (String) timer.get("today");
         String nextDay= (String) timer.get("nextDay");
-        return mzVisitMapper.getMZname(today,nextDay);
+        List<MZVisit> mZname = mzVisitMapper.getMZname(today, nextDay);
+        Collections.sort(mZname, new Comparator<MZVisit>() {
+
+            public int compare(MZVisit u1, MZVisit u2) {
+
+                // 按照学生的年龄进行降序排列
+                if (u1.getCount() < u2.getCount()) {
+                    return -1;
+                }
+                if (u1.getCount() == u2.getCount()) {
+                    return 0;
+                }
+                return 1;
+            }
+        });
+        return  mZname;
+
     }
 
     public DrugMessage getDrugMessage(){
         DrugMessage drugMessage=new DrugMessage();
+
         drugMessage.setDaiShoufei(getDaiShoufei());
         drugMessage.setWeiQuYao(getWeiQuYao());
-        drugMessage.setYyCount(getYyCount());
+        drugMessage.setYyCount(getYShouFeiCount());
         drugMessage.setYiQuYao(getYiQuYao());
+
         return drugMessage;
     }
 
@@ -57,11 +75,11 @@ public class MZVisitService {
         String nextDay= (String) timer.get("nextDay");
         return mzVisitMapper.getWeiQuYao(today,nextDay);
     }
-    public String getYyCount(){
+    public String getYShouFeiCount(){
         HashMap timer = TimeMap.getTimer();
         String today= (String) timer.get("today");
         String nextDay= (String) timer.get("nextDay");
-        return mzVisitMapper.getYyCount(today,nextDay);
+        return mzVisitMapper.getYShoueiCount(today,nextDay);
     }
 
 
@@ -79,7 +97,8 @@ public class MZVisitService {
            String lastDay=sf.format(c.getTime());
            String count=mzVisitMapper.getMzVisitCount(lastDay,today);
             VisitWeek visitWeek=new VisitWeek();
-            visitWeek.setDay(today);
+            lastDay=lastDay.substring(5);
+            visitWeek.setDay(lastDay);
             visitWeek.setCount(count);
             list.add(visitWeek);
 
