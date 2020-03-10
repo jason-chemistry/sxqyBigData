@@ -48,12 +48,20 @@ public class MZVisitService {
 
     public DrugMessage getDrugMessage(){
         DrugMessage drugMessage=new DrugMessage();
+        String daiShoufei = getDaiShoufei();
+        String weiQuYao = getWeiQuYao();
+        String yShouFeiCount = getYShouFeiCount();
+        String yiQuyao= getYiQuYao();
+        String Fcount= String.valueOf((Integer.parseInt(daiShoufei)+Integer.parseInt(yShouFeiCount)));
+        String Ycount= String.valueOf((Integer.parseInt(weiQuYao)+Integer.parseInt(yiQuyao)));
+        drugMessage.setDaiShoufei(daiShoufei);
+        drugMessage.setWeiQuYao(weiQuYao);
 
-        drugMessage.setDaiShoufei(getDaiShoufei());
-        drugMessage.setWeiQuYao(getWeiQuYao());
-        drugMessage.setYyCount(getYShouFeiCount());
-        drugMessage.setYiQuYao(getYiQuYao());
-
+         // 是收费人数
+        drugMessage.setYyCount(yShouFeiCount);
+        drugMessage.setYiQuYao(yiQuyao);
+        drugMessage.setFcount(Fcount);
+        drugMessage.setYcount(Ycount);
         return drugMessage;
     }
 

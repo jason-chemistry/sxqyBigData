@@ -61,10 +61,12 @@ function getDrugMessage() {
 		timeout:2000,//超时
 		//请求成功
 		success:function(data,status){
+
 			$(".YiQuYao").html(data.yiQuYao);
 			$(".WeiQuYao").html(data.weiQuYao);
 			$(".DaiShoufei").html(data.daiShoufei);
 			$(".YyCount").html(data.yyCount);
+
 		},
 		//失败/超时
 		error:function(XMLHttpRequest,textStatus,errorThrown){

@@ -51,10 +51,10 @@ public class MZVisitController {
 
     }
     @ResponseBody
-    @RequestMapping(value = "YyCount",method = RequestMethod.GET)
-    @ApiOperation(value = "获取门诊预约人数", notes = "无需参数")
+    @RequestMapping(value = "YSFCount",method = RequestMethod.GET)
+    @ApiOperation(value = "获取门诊已收费", notes = "无需参数")
     public String getYyCount (){
-        return JSONObject.toJSONString(mzVisitService.getYyCount());
+        return JSONObject.toJSONString(mzVisitService.getYShouFeiCount());
 
     }
     @ResponseBody
