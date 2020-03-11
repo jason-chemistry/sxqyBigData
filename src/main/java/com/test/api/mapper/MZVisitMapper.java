@@ -22,4 +22,6 @@ public interface MZVisitMapper {
 
     String getMzVisitCount(@Param("today")String today,@Param("nextDay")String nextDay);
 
+    List<MZVisit> getMZVisitUnit(@Param("today") String today, @Param("nextDay") String nextDay);
+
 }

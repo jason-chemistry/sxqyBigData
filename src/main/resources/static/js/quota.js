@@ -61,12 +61,13 @@ function getDrugMessage() {
 		timeout:2000,//超时
 		//请求成功
 		success:function(data,status){
-
+			console.log(data)
 			$(".YiQuYao").html(data.yiQuYao);
 			$(".WeiQuYao").html(data.weiQuYao);
 			$(".DaiShoufei").html(data.daiShoufei);
 			$(".YyCount").html(data.yyCount);
-
+			$(".Fcount").html(data.fcount);
+			$(".Ycount").html(data.ycount);
 		},
 		//失败/超时
 		error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -74,126 +75,6 @@ function getDrugMessage() {
 		}
 	})
 }
-
-//各科室预约人数
-function  getDepartment() {
-	var names=[];
-	var nums=[];
-	$.ajax({
-		url:'http://localhost:9090/MZVisits',//地址
-		dataType:'json',//数据类型
-		type:'GET',//类型
-		timeout:2000,//超时
-		//请求成功
-		success:function(data,status){
-			for(var i=0;i<data.length;i++){
-				names.push(data[i].name.replace(/\s+/g,""));    //挨个取出类别并填入类别数组
-				nums.push(data[i].count);
-			}
-			var lineChart4 = echarts.init(document.getElementById('lineChart4'));
-			lineChart4.setOption({
-
-				grid: {
-					left:120
-				},
-
-				xAxis: {
-					type: 'value',
-
-					axisLine: {
-						lineStyle: {
-							color: '#FFF'
-
-						}
-					},
-
-				},
-
-				yAxis: {
-					type: "category",
-
-					data:names,
-					axisLabel: {
-						textStyle: {
-							//文字样式
-							color: "#fff",
-							fontSize: "12",
-
-						},
-						show:true,					//---是否显示
-						inside:false,				//---是否朝内
-						rotate:0,					//---旋转角度
-						margin: 8,
-					},
-					// 控制网格线是否显示
-					splitLine: {
-						//  改变轴线颜色
-						lineStyle: {
-							color: "rgba(0,0,0,0)"
-						}
-					},
-
-					axisLine: {
-						//隐藏y轴线
-						show: false
-					},
-
-
-				},
-
-				series: [
-					{
-						itemStyle: {
-
-							normal: {
-
-								//好，这里就是重头戏了，定义一个list，然后根据所以取得不同的值，这样就实现了，
-
-								color: function(params) {
-
-									// build a color map as your need.
-
-									var colorList = [
-
-										'#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
-
-										'#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
-
-										'#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
-
-									];
-
-									return colorList[params.dataIndex]
-
-								},
-
-								//以下为是否显示，显示位置和显示格式的设置了
-
-								label: {
-
-									show: true,
-
-									position: 'right',
-
-
-								}
-
-							}
-
-						},
-						type: 'bar',
-						data: nums,
-					}
-				]
-			});
-		},
-		//失败/超时
-		error:function(XMLHttpRequest,textStatus,errorThrown){
-
-		}
-	})
-}
-
 //一周门诊人数
 function getWeekMzCount() {
 	var day=[];
@@ -305,7 +186,6 @@ function getWeekMzCount() {
 
 
 }
-
 //今日各时间点（就诊、收费、取药、检验、检查）折线图
 function getDataMap() {
 	let sfCount=[];
@@ -399,24 +279,25 @@ function getDataMap() {
 					{
 						name: '就诊',
 						type: 'line',
-
+						itemStyle : { normal: {label : {show: true}}},
 						data: data['MZCOUNT']
 					},
 					{
 						name: '收费',
 						type: 'line',
-
+						itemStyle : { normal: {label : {show: true}}},
 						data: data['SFCOUNT']
 					},
 					{
 						name: '取药',
 						type: 'line',
-
+						itemStyle : { normal: {label : {show: true}}},
 						data:data['QYCOUNT']
 					},
 					{
 						name: '检验',
 						type: 'line',
+						itemStyle : { normal: {label : {show: true}}},
 						data:data['LISCOUNT']
 					},
 
@@ -436,27 +317,158 @@ function getDataMap() {
 
 }
 
-function lisAndCheck() {
-	var day=[];
-	var count=[];
+
+
+
+//各科室预约人数
+function  getDepartment() {
+	var names=[];
+	var nums=[];
 	$.ajax({
-		url:'http://localhost:9090/dataMap/CheckAndLis',//地址
+		url:'http://localhost:9090/MZVisits/MzUnit',//地址
 		dataType:'json',//数据类型
 		type:'GET',//类型
 		timeout:2000,//超时
 		//请求成功
 		success:function(data,status){
-			var lis=data[0];
-			var check=data[1];
-			var colors = ['#C1232B','#B5C334'];
+			for(var i=0;i<data.length;i++){
+				names.push(data[i].name.replace(/\s+/g,""));    //挨个取出类别并填入类别数组
+				nums.push(data[i].count);
+			}
 			var lineChart3 = echarts.init(document.getElementById('lineChart3'));
 			lineChart3.setOption({
+
+				grid: {
+					left:150
+				},
+
+				xAxis: {
+					type: 'value',
+
+					axisLine: {
+						lineStyle: {
+							color: '#FFF'
+
+						}
+					},
+
+				},
+
+				yAxis: {
+					type: "category",
+
+					data:names,
+					axisLabel: {
+						textStyle: {
+							//文字样式
+							color: "#fff",
+							fontSize: "12",
+
+						},
+						show:true,					//---是否显示
+						inside:false,				//---是否朝内
+						rotate:0,					//---旋转角度
+						margin: 8,
+					},
+					// 控制网格线是否显示
+					splitLine: {
+						//  改变轴线颜色
+						lineStyle: {
+							color: "rgba(0,0,0,0)"
+						}
+					},
+
+					axisLine: {
+						//隐藏y轴线
+						show: false
+					},
+
+
+				},
+
+				series: [
+					{
+						itemStyle: {
+
+							normal: {
+
+								//好，这里就是重头戏了，定义一个list，然后根据所以取得不同的值，这样就实现了，
+
+								color: function(params) {
+
+									// build a color map as your need.
+
+									var colorList = [
+
+										'#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+
+										'#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+
+										'#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+
+									];
+
+									return colorList[params.dataIndex]
+
+								},
+
+								//以下为是否显示，显示位置和显示格式的设置了
+
+								label: {
+
+									show: true,
+
+									position: 'right',
+
+
+								}
+
+							}
+
+						},
+						type: 'bar',
+						data: nums,
+					}
+				]
+			});
+		},
+		//失败/超时
+		error:function(XMLHttpRequest,textStatus,errorThrown){
+
+		}
+	})
+}
+
+function lisAndCheck() {
+	var day=[];
+	var count=[];
+	var names=[];
+	$.ajax({
+		url:'http://localhost:9090/MZVisits',//地址
+		dataType:'json',//数据类型
+		type:'GET',//类型
+		timeout:2000,//超时
+		//请求成功
+		success:function(data,status){
+			var servicedata=[];
+
+			for(var i=0;i<data.length;i++){
+
+				var obj=new Object();
+				obj.name=data[i].name.replace(/\s+/g,"");
+				names.push(data[i].name.replace(/\s+/g,""));
+				obj.value=data[i].count;
+				servicedata[i]=obj;
+			}
+			var colors = ['#C1232B','#B5C334'];
+			var lineChart4 = echarts.init(document.getElementById('lineChart4'));
+			lineChart4.setOption({
 				color:colors,
 				legend: {
 					top: "10%",
 					orient: 'horizontal',
 					left: 'center',
-					data: ['检验人次', '检查人次'],
+					data: names,
 					textStyle:{//图例文字的样式
 						color:'#fff',
 						fontSize:13
@@ -467,12 +479,52 @@ function lisAndCheck() {
 						name: '访问来源',
 						type: 'pie',
 						radius: '55%',
-						center: ['50%', '55%'],
-						data: [
-							{value: lis, name: '检验人次'},
-							{value: check, name: '检查人次'},
+						center: ['50%', '60%'],
+						data: servicedata,
+						itemStyle: {
 
-						],
+							normal: {
+
+								//好，这里就是重头戏了，定义一个list，然后根据所以取得不同的值，这样就实现了，
+
+								color: function(params) {
+
+									// build a color map as your need.
+
+									var colorList = [
+
+										'#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+
+										'#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+
+										'#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0',
+										'#00FFFF', '#00FF00', '#FFFF00', '#FF8C00', '#FF0000', '#FE8463'
+
+									];
+
+									return colorList[params.dataIndex]
+
+								},
+
+								//以下为是否显示，显示位置和显示格式的设置了
+
+								label: {
+
+									show: true,
+
+									position: 'right',
+
+
+								}
+
+							}
+
+						},
+						label:{
+							normal:{
+								show:false
+							}
+						},
 						emphasis: {
 							itemStyle: {
 								shadowBlur: 10,
@@ -492,6 +544,10 @@ function lisAndCheck() {
 
 }
 
+
+
+
+
 function setClock() {
 	let date = new Date();
 	let Hour=date.getHours().toString();
@@ -504,11 +560,6 @@ function setClock() {
 	}
 
 }
-
-
-//开始以后去查九次 每次到几点的时间，如果是0的话就去掉
-
-
 //获取时间
 function getTime() {
 	var  date = new Date();

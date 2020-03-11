@@ -38,5 +38,11 @@
     <select id="getMzVisitCount" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT count(*) from mz_visit where visit_date BETWEEN (#{today}) and (#{nextDay})
     </select>
+    
+    <select id="getMZVisitUnit" parameterType="java.lang.String" resultMap="getMZVisit">
+        select b.name,count(*)count from mz_visit  a left JOIN zd_unit_code b on a.visit_dept_code=b.code
+        where a.visit_date BETWEEN (#{today}) and (#{nextDay})  GROUP BY b.name
+
+    </select>
 
 </mapper>

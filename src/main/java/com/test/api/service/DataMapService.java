@@ -36,8 +36,9 @@ public class DataMapService {
     public List<String> getMzCountHours(){
         ArrayList<String> mzCount=new ArrayList<>();
         List<String> hours = TimeMap.getHours();
+        List<String> hours1 = TimeMap.getHours1();
         for (int i=0;i<hours.size();i++){
-            int count=dataMapper.getMzCount(hours.get(i),hours.get(i+1));
+            int count=dataMapper.getMzCount(hours.get(i),hours1.get(i));
             if(count<=0){
                 break;
             }else{
@@ -52,8 +53,9 @@ public class DataMapService {
     public List<String> getLisCountHours(){
         ArrayList<String> lisCount=new ArrayList<>();
         List<String> hours = TimeMap.getHours();
+        List<String> hours1 = TimeMap.getHours1();
         for (int i=0;i<hours.size();i++){
-            int count= Integer.parseInt(dataMapper.getLisCount(hours.get(i),hours.get(i+1)));
+            int count= Integer.parseInt(dataMapper.getLisCount(hours.get(i),hours1.get(i)));
             if(count<=0){
                 break;
             }else{
@@ -68,8 +70,9 @@ public class DataMapService {
     public List<String> getQYCountHours(){
         ArrayList<String> QyCount =new ArrayList<>();
         List<String> hours = TimeMap.getHours();
+        List<String> hours1 = TimeMap.getHours1();
         for (int i=0;i<hours.size();i++){
-            int count= dataMapper.getQYCount(hours.get(i),hours.get(i+1));
+            int count= dataMapper.getQYCount(hours.get(i),hours1.get(i));
             if(count<=0){
                 break;
             }else{
@@ -79,14 +82,18 @@ public class DataMapService {
         return QyCount;
     }
 
+
     public List<String> getSfCountHours(){
         ArrayList<String> SfCount =new ArrayList<>();
         List<String> hours = TimeMap.getHours();
+        List<String> hours1 = TimeMap.getHours1();
         for (int i=0;i<hours.size();i++){
-            int count= dataMapper.getSfCount(hours.get(i),hours.get(i+1));
+            int count= dataMapper.getSfCount(hours.get(i),hours1.get(i));
             if(count<=0){
+
                 break;
             }else{
+
                 SfCount.add(String.valueOf(count));
             }
         }

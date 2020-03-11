@@ -46,6 +46,30 @@ public class MZVisitService {
 
     }
 
+    public List<MZVisit> getMZVisitUnit(){
+
+        HashMap timer = TimeMap.getTimer();
+        String today= (String) timer.get("today");
+        String nextDay= (String) timer.get("nextDay");
+        List<MZVisit> mZname = mzVisitMapper.getMZVisitUnit(today, nextDay);
+        Collections.sort(mZname, new Comparator<MZVisit>() {
+
+            public int compare(MZVisit u1, MZVisit u2) {
+
+                // 按照学生的年龄进行降序排列
+                if (u1.getCount() < u2.getCount()) {
+                    return -1;
+                }
+                if (u1.getCount() == u2.getCount()) {
+                    return 0;
+                }
+                return 1;
+            }
+        });
+        return  mZname;
+
+    }
+
     public DrugMessage getDrugMessage(){
         DrugMessage drugMessage=new DrugMessage();
         String daiShoufei = getDaiShoufei();

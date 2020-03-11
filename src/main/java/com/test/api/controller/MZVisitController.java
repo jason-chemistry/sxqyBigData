@@ -28,6 +28,14 @@ public class MZVisitController {
         return JSONObject.toJSONString(mzVisitService.getMZVisit());
 
     }
+    @ResponseBody
+    @RequestMapping(value = "/MzUnit",method = RequestMethod.GET)
+    @ApiOperation(value = "获取门诊各科室就诊详情", notes = "无需参数")
+    public String getMzUnit (){
+        return JSONObject.toJSONString(mzVisitService.getMZVisitUnit());
+
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "DaiShoufei",method = RequestMethod.GET)

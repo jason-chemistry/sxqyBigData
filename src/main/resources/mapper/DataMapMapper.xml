@@ -16,6 +16,8 @@
         </select>
 
         <select id="getSfCount" parameterType="java.lang.String" resultType="java.lang.Integer">
-                SELECT count(*) FROM dbo.mz_charge_detail WHERE pay_mark = '0' AND charge_date between (#{today}) and (#{nextDay})
+        SELECT count(*) from (
+		    SELECT count(*)count from dbo.mz_charge_detail WHERE pay_mark = '0' and charge_date BETWEEN  (#{today}) and (#{nextDay}) GROUP BY patient_id
+	    )A
         </select>
 </mapper>
